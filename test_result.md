@@ -106,59 +106,74 @@ user_problem_statement: "Build a fully functional typing practice website with a
 backend:
   - task: "Root health endpoint (/api/)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented APIRouter with prefix /api and root GET returning {message: 'Hello World'}."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED: GET /api/ returns correct {message: 'Hello World'} response with status 200. Endpoint working perfectly."
   - task: "Create typing session (/api/sessions POST)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Validates input, saves UUID doc to Mongo, returns created session with id and created_at."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED: POST /api/sessions creates sessions with valid UUID ids, ISO datetime strings for created_at, persists to MongoDB correctly. Validation works - negative wpm/accuracy properly returns 400 status. All requirements met."
   - task: "List sessions (/api/sessions GET)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Supports optional user_id filter and sorts by created_at desc."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED: GET /api/sessions returns all sessions and correctly filters by user_id parameter. All returned sessions match the filter criteria when specified."
   - task: "Leaderboard (/api/leaderboard GET)"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Fetches top sessions by wpm with projected fields."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED: GET /api/leaderboard returns entries correctly sorted by WPM descending. Tested with multiple entries (92.7, 85.2, 75.5, 68.4 WPM) - perfect sorting confirmed. Response format includes all required fields."
   - task: "CORS and env adherence"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "CORS enabled, Mongo uses MONGO_URL and DB_NAME from env; all routes under /api."
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED: All routes properly prefixed with /api, CORS working (successful API calls from external URL), environment variables correctly used (MONGO_URL, DB_NAME), UUIDs used instead of ObjectIDs, datetime fields returned as ISO strings."
 frontend:
   - task: "3D-like typing UI with keyboard animation and hands"
     implemented: true
