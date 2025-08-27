@@ -117,7 +117,7 @@ async def get_status_checks():
 @api_router.post("/sessions", response_model=TypingSession)
 async def create_session(input: TypingSessionCreate):
     # Basic validation
-    if input.wpm &lt; 0 or input.accuracy &lt; 0:
+    if input.wpm < 0 or input.accuracy < 0:
         raise HTTPException(status_code=400, detail="Invalid metrics")
 
     session = TypingSession(**input.model_dump())
