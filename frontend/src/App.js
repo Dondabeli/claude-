@@ -145,18 +145,25 @@ function App() {
         return { wpm: newWpm, accuracy, consistency };
       });
 
-      // time mode auto-stop
-      if (mode === "time" && remainingTime === 0) {
-        stopSession();
+      // compute remaining internally to avoid stale startTime/remaining at session start
+      if (mode === "time" && startTime > 0) {
+        const elapsedSec = Math.floor((Date.now() - startTime) / 1000);
+        const rem = Math.max(timeLimit - elapsedSec, 0);
+        if (rem === 0) {
+          stopSession();
+        }
       }
 
       // words mode auto-stop
-      if (mode === "words" && typed.trim().split(/\s+/).length >= wordLimit) {
-        stopSession();
+      if (mode === "words") {
+        const wordsTyped = typed.trim() ? typed.trim().split(/\s+/).length : 0;
+        if (wordsTyped >= wordLimit) {
+          stopSession();
+        }
       }
     }, 200);
     return () => clearInterval(intervalRef.current);
-  }, [running, totalTyped, correctTyped, startTime, mode, remainingTime, wordLimit, typed]);
+  }, [running, totalTyped, correctTyped, startTime, mode, timeLimit, wordLimit, typed]);
 
   function startSession() {
     setTyped("");
