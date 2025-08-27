@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import axios from "axios";
+import SplineBackground from "./SplineBackground";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -223,6 +224,9 @@ function App() {
 
   return (
     <div className="page">
+      {/* Spline background, non-interactive */}
+      <SplineBackground scene="https://prod.spline.design/gEyKbt82NG0XiBSu/scene.splinecode" />
+
       <nav className="topbar">
         <div className="brand">NeoType 3D</div>
         <div className="controls">

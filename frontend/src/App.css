@@ -15,7 +15,8 @@
 html, body, #root { height: 100%; }
 body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; background: radial-gradient(1200px 600px at 50% -10%, #0f172a 0%, #0b0d10 40%, #07090c 100%); color: var(--fg); }
 
-.page { min-height: 100vh; display: flex; flex-direction: column; }
+.page { min-height: 100vh; display: flex; flex-direction: column; position: relative; }
+.spline-bg { position: fixed; inset: 0; z-index: 0; opacity: 0.25; pointer-events: none; }
 .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; backdrop-filter: blur(6px); background: rgba(10,12,16,0.4); border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 10; }
 .brand { font-weight: 800; letter-spacing: 1px; color: var(--accent); }
 .controls { display: flex; gap: 12px; align-items: center; }
@@ -25,7 +26,7 @@ select, input[type=number] { background: var(--card); border: 1px solid #243044;
 .btn:hover { filter: brightness(1.1); }
 .btn.danger { background: linear-gradient(180deg, var(--danger), #ff9aa7); }
 
-.scene { perspective: 1200px; display: grid; grid-template-columns: 1fr; place-items: center; padding: 40px 20px 0; gap: 24px; }
+.scene { perspective: 1200px; display: grid; grid-template-columns: 1fr; place-items: center; padding: 40px 20px 0; gap: 24px; position: relative; z-index: 1; }
 .monitor { width: 840px; max-width: 90vw; transform: rotateX(8deg) rotateY(0deg) translateY(0); transform-style: preserve-3d; }
 .screen { background: #0a0f1a; border: 1px solid #1b2333; border-radius: 14px; padding: 18px; height: 240px; box-shadow: inset 0 0 50px rgba(0,255,255,0.06), 0 20px 80px rgba(0,0,0,0.6); overflow: hidden; position: relative; }
 .target { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, monospace; font-size: 18px; line-height: 1.4; letter-spacing: 0.02em; white-space: pre-wrap; word-break: break-word; color: #9fb6d6; position: relative; }
@@ -47,7 +48,7 @@ select, input[type=number] { background: var(--card); border: 1px solid #243044;
 .hand.left { }
 .hand.right { }
 
-.stats { padding: 24px 20px 60px; }
+.stats { padding: 24px 20px 60px; position: relative; z-index: 1; }
 .card { background: var(--card); border: 1px solid #1b2333; border-radius: 14px; padding: 16px; margin: 12px 0; box-shadow: 0 20px 80px rgba(0,0,0,0.3); }
 .columns { display: grid; grid-template-columns: 1fr; gap: 14px; }
 @media (min-width: 900px) { .columns { grid-template-columns: 1fr 1fr; } }
@@ -55,4 +56,4 @@ select, input[type=number] { background: var(--card); border: 1px solid #243044;
 .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
 .value { font-size: 40px; font-weight: 900; color: var(--fg); }
 .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; color: #9fb6d6; }
-.footer { padding: 20px; text-align: center; color: #7f93b0; border-top: 1px solid #132236; background: rgba(0,0,0,0.2); }
+.footer { padding: 20px; text-align: center; color: #7f93b0; border-top: 1px solid #132236; background: rgba(0,0,0,0.2); position: relative; z-index: 1; }
