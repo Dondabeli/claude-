@@ -36,6 +36,15 @@ function useUserId() {
   return userId;
 }
 
+function useTheme() {
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  return [theme, setTheme];
+}
+
 function generateText(words = 30) {
   const list = [];
   for (let i = 0; i < words; i++) {
@@ -54,6 +63,7 @@ function computeStats({ totalTyped, correctTyped, startTime }) {
 
 function App() {
   const userId = useUserId();
+  const [theme, setTheme] = useTheme();
 
   const [mode, setMode] = useState("time"); // time | words | freestyle
   const [timeLimit, setTimeLimit] = useState(60); // seconds
@@ -237,6 +247,11 @@ function App() {
           </select>
           {mode === "time" && <span className="pill">{remainingTime}s</span>}
           {mode === "words" && <input className="pill" type="number" min={10} max={100} value={wordLimit} onChange={e => setWordLimit(Number(e.target.value))} />}
+          <select value={theme} onChange={e => setTheme(e.target.value)}>
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+            <option value="retro">Retro</option>
+          </select>
           {!running ? (
             <button className="btn" onClick={startSession}>Start</button>
           ) : (

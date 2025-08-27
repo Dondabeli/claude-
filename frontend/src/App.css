@@ -11,12 +11,44 @@
   --bad: #fb7185;
 }
 
+html[data-theme="light"] {
+  --bg: #eef5ff;
+  --fg: #0b0d10;
+  --muted: #51607a;
+  --accent: #0ea5e9;
+  --danger: #d61f3a;
+  --card: #ffffff;
+  --key: #e6ecf5;
+  --keycap: #f4f7fb;
+  --ok: #16a34a;
+  --bad: #dc2626;
+}
+
+html[data-theme="retro"] {
+  --bg: #000000;
+  --fg: #baf7b8;
+  --muted: #5abf5a;
+  --accent: #10ff84;
+  --danger: #ff5d74;
+  --card: #081908;
+  --key: #0a210a;
+  --keycap: #0f2a0f;
+  --ok: #10ff84;
+  --bad: #ff3b3b;
+}
+
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; }
 body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial; background: radial-gradient(1200px 600px at 50% -10%, #0f172a 0%, #0b0d10 40%, #07090c 100%); color: var(--fg); }
 
+html[data-theme="light"] body { background: radial-gradient(1200px 600px at 50% -10%, #eef5ff 0%, #eaf0f7 40%, #e8edf5 100%); }
+html[data-theme="retro"] body { background: radial-gradient(800px 400px at 50% -10%, #001400 0%, #000a00 40%, #000000 100%); }
+
 .page { min-height: 100vh; display: flex; flex-direction: column; position: relative; }
 .spline-bg { position: fixed; inset: 0; z-index: 0; opacity: 0.25; pointer-events: none; }
+html[data-theme="light"] .spline-bg { opacity: 0.35; }
+html[data-theme="retro"] .spline-bg { opacity: 0.18; }
+
 .topbar { height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; backdrop-filter: blur(6px); background: rgba(10,12,16,0.4); border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 10; }
 .brand { font-weight: 800; letter-spacing: 1px; color: var(--accent); }
 .controls { display: flex; gap: 12px; align-items: center; }
