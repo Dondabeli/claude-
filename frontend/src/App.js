@@ -37,7 +37,7 @@ function useUserId() {
 
 function generateText(words = 30) {
   const list = [];
-  for (let i = 0; i &lt; words; i++) {
+  for (let i = 0; i < words; i++) {
     list.push(WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]);
   }
   return list.join(" ");
