@@ -72,7 +72,7 @@ function App() {
   const totalTyped = typed.length;
   const correctTyped = useMemo(() => {
     let c = 0;
-    for (let i = 0; i &lt; typed.length; i++) {
+    for (let i = 0; i < typed.length; i++) {
       if (typed[i] === target[i]) c++;
     }
     return c;
@@ -215,94 +215,94 @@ function App() {
   const caretIndex = typed.length;
 
   return (
-    &lt;div className="page"&gt;
-      &lt;nav className="topbar"&gt;
-        &lt;div className="brand"&gt;NeoType 3D&lt;/div&gt;
-        &lt;div className="controls"&gt;
-          &lt;select value={mode} onChange={e =&gt; setMode(e.target.value)}&gt;
-            &lt;option value="time"&gt;Time (60s)&lt;/option&gt;
-            &lt;option value="words"&gt;Words ({wordLimit})&lt;/option&gt;
-            &lt;option value="freestyle"&gt;Freestyle&lt;/option&gt;
-          &lt;/select&gt;
-          {mode === "time" &amp;&amp; &lt;span className="pill"&gt;{remainingTime}s&lt;/span&gt;}
-          {mode === "words" &amp;&amp; &lt;input className="pill" type="number" min={10} max={100} value={wordLimit} onChange={e =&gt; setWordLimit(Number(e.target.value))} /&gt;}
+    <div className="page">
+      <nav className="topbar">
+        <div className="brand">NeoType 3D</div>
+        <div className="controls">
+          <select value={mode} onChange={e => setMode(e.target.value)}>
+            <option value="time">Time (60s)</option>
+            <option value="words">Words ({wordLimit})</option>
+            <option value="freestyle">Freestyle</option>
+          </select>
+          {mode === "time" && <span className="pill">{remainingTime}s</span>}
+          {mode === "words" && <input className="pill" type="number" min={10} max={100} value={wordLimit} onChange={e => setWordLimit(Number(e.target.value))} />}
           {!running ? (
-            &lt;button className="btn" onClick={startSession}&gt;Start&lt;/button&gt;
+            <button className="btn" onClick={startSession}>Start</button>
           ) : (
-            &lt;button className="btn danger" onClick={stopSession}&gt;Stop&lt;/button&gt;
+            <button className="btn danger" onClick={stopSession}>Stop</button>
           )}
-        &lt;/div&gt;
-      &lt;/nav&gt;
+        </div>
+      </nav>
 
-      &lt;div className="scene"&gt;
-        &lt;div className="monitor"&gt;
-          &lt;div className="screen"&gt;
-            &lt;div className="target"&gt;
-              {target.split("").map((ch, idx) =&gt; {
+      <div className="scene">
+        <div className="monitor">
+          <div className="screen">
+            <div className="target">
+              {target.split("").map((ch, idx) => {
                 const typedCh = typed[idx];
                 const status = typedCh == null ? "pending" : (typedCh === ch ? "ok" : "bad");
-                return &lt;span key={idx} className={`ch ${status}`}&gt;{ch}&lt;/span&gt;;
+                return <span key={idx} className={`ch ${status}`}>{ch}</span>;
               })}
-              &lt;span className="caret" style={{ left: `${(caretIndex % 60) * 0.9}ch`, top: `${Math.floor(caretIndex / 60) * 1.4}em` }} /&gt;
-            &lt;/div&gt;
-          &lt;/div&gt;
-          &lt;div className="stand" /&gt;
-        &lt;/div&gt;
+              <span className="caret" style={{ left: `${(caretIndex % 60) * 0.9}ch`, top: `${Math.floor(caretIndex / 60) * 1.4}em` }} />
+            </div>
+          </div>
+          <div className="stand" />
+        </div>
 
-        &lt;div className="keyboard"&gt;
-          {KEY_ROWS.map((row, rIdx) =&gt; (
-            &lt;div className="key-row" key={rIdx}&gt;
-              {row.map(k =&gt; &lt;Key key={k} label={k} pressed={pressedKeys.has(k)} /&gt;)}
-            &lt;/div&gt;
+        <div className="keyboard">
+          {KEY_ROWS.map((row, rIdx) => (
+            <div className="key-row" key={rIdx}>
+              {row.map(k => <Key key={k} label={k} pressed={pressedKeys.has(k)} />)}
+            </div>
           ))}
-        &lt;/div&gt;
+        </div>
 
-        &lt;div className="hands"&gt;
-          &lt;div className="hand left" style={{ transform: `translate3d(${handOffset.left * 2}px, 0, 0)` }} /&gt;
-          &lt;div className="hand right" style={{ transform: `translate3d(${handOffset.right * -2}px, 0, 0)` }} /&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+        <div className="hands">
+          <div className="hand left" style={{ transform: `translate3d(${handOffset.left * 2}px, 0, 0)` }} />
+          <div className="hand right" style={{ transform: `translate3d(${handOffset.right * -2}px, 0, 0)` }} />
+        </div>
+      </div>
 
-      &lt;section className="stats"&gt;
-        &lt;div className="card"&gt;
-          &lt;div className="stat"&gt;
-            &lt;div className="label"&gt;WPM&lt;/div&gt;
-            &lt;div className="value"&gt;{stats.wpm.toFixed(1)}&lt;/div&gt;
-          &lt;/div&gt;
-          &lt;div className="stat"&gt;
-            &lt;div className="label"&gt;Accuracy&lt;/div&gt;
-            &lt;div className="value"&gt;{stats.accuracy.toFixed(0)}%&lt;/div&gt;
-          &lt;/div&gt;
-          &lt;div className="stat"&gt;
-            &lt;div className="label"&gt;Consistency&lt;/div&gt;
-            &lt;div className="value"&gt;{stats.consistency.toFixed(0)}&lt;/div&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
+      <section className="stats">
+        <div className="card">
+          <div className="stat">
+            <div className="label">WPM</div>
+            <div className="value">{stats.wpm.toFixed(1)}</div>
+          </div>
+          <div className="stat">
+            <div className="label">Accuracy</div>
+            <div className="value">{stats.accuracy.toFixed(0)}%</div>
+          </div>
+          <div className="stat">
+            <div className="label">Consistency</div>
+            <div className="value">{stats.consistency.toFixed(0)}</div>
+          </div>
+        </div>
 
-        &lt;div className="columns"&gt;
-          &lt;div className="card"&gt;
-            &lt;h3&gt;Your Sessions&lt;/h3&gt;
-            &lt;ul className="list"&gt;
-              {history.slice(0, 8).map(s =&gt; (
-                &lt;li key={s.id}&gt;{new Date(s.created_at).toLocaleDateString()} — {s.wpm} wpm, {s.accuracy}%&lt;/li&gt;
+        <div className="columns">
+          <div className="card">
+            <h3>Your Sessions</h3>
+            <ul className="list">
+              {history.slice(0, 8).map(s => (
+                <li key={s.id}>{new Date(s.created_at).toLocaleDateString()} — {s.wpm} wpm, {s.accuracy}%</li>
               ))}
-            &lt;/ul&gt;
-          &lt;/div&gt;
-          &lt;div className="card"&gt;
-            &lt;h3&gt;Leaderboard&lt;/h3&gt;
-            &lt;ol className="list"&gt;
-              {leaderboard.slice(0, 8).map((s, i) =&gt; (
-                &lt;li key={`${s.user_id}-${i}`}&gt;{s.wpm} wpm — {String(s.user_id).slice(0,6)}...&lt;/li&gt;
+            </ul>
+          </div>
+          <div className="card">
+            <h3>Leaderboard</h3>
+            <ol className="list">
+              {leaderboard.slice(0, 8).map((s, i) => (
+                <li key={`${s.user_id}-${i}`}>{s.wpm} wpm — {String(s.user_id).slice(0,6)}...</li>
               ))}
-            &lt;/ol&gt;
-          &lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/section&gt;
+            </ol>
+          </div>
+        </div>
+      </section>
 
-      &lt;footer className="footer"&gt;
+      <footer className="footer">
         Built with React + FastAPI + Mongo • Dark 3D UI • No cookies or trackers
-      &lt;/footer&gt;
-    &lt;/div&gt;
+      </footer>
+    </div>
   );
 }
 
@@ -311,9 +311,9 @@ function Key({ label, pressed }) {
   const style = { transform: pressed ? "translateZ(0px) translateY(2px)" : "translateZ(8px)" };
   const wide = label === "space" ? " wide" : "";
   return (
-    &lt;div className={`key${wide}`} style={style}&gt;
-      &lt;div className="keycap"&gt;{display}&lt;/div&gt;
-    &lt;/div&gt;
+    <div className={`key${wide}`} style={style}>
+      <div className="keycap">{display}</div>
+    </div>
   );
 }
 
