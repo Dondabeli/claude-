@@ -101,3 +101,103 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Build a fully functional typing practice website with a 3D interactive experience using React frontend and FastAPI+Mongo backend. Track sessions, show stats, and a leaderboard."
+backend:
+  - task: "Root health endpoint (/api/)"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Implemented APIRouter with prefix /api and root GET returning {message: 'Hello World'}."
+  - task: "Create typing session (/api/sessions POST)"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Validates input, saves UUID doc to Mongo, returns created session with id and created_at."
+  - task: "List sessions (/api/sessions GET)"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Supports optional user_id filter and sorts by created_at desc."
+  - task: "Leaderboard (/api/leaderboard GET)"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Fetches top sessions by wpm with projected fields."
+  - task: "CORS and env adherence"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "CORS enabled, Mongo uses MONGO_URL and DB_NAME from env; all routes under /api."
+frontend:
+  - task: "3D-like typing UI with keyboard animation and hands"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "CSS 3D scene with monitor, animated keys reacting to keydown, and hand movement. No external 3D engine to keep MVP fast."
+  - task: "Frontend API integration via REACT_APP_BACKEND_URL"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Uses process.env.REACT_APP_BACKEND_URL + '/api' without hardcoding."
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Root health endpoint (/api/)"
+    - "Create typing session (/api/sessions POST)"
+    - "List sessions (/api/sessions GET)"
+    - "Leaderboard (/api/leaderboard GET)"
+  stuck_tasks: []
+  test_all: true
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "Please verify backend endpoints per test_plan. Use default env; no auth. For POST /api/sessions use a realistic payload. Also verify that invalid metrics (negative wpm/accuracy) return 400."
